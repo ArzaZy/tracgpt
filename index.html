@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TracGPT — TracLabs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="ambient" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="scrim" id="scrim"></div>
+
+<aside class="sidebar glass" id="sidebar">
+  <div class="brand"><span class="logo"><i data-lucide="sparkles"></i></span><div><b>TracGPT</b><small>by TracLabs</small></div></div>
+  <button class="btn primary" id="newChat"><i data-lucide="plus"></i>New Chat</button>
+  <nav>
+    <button class="nav active" data-view="chat"><i data-lucide="message-square"></i>Chat</button>
+    <button class="nav" data-view="tools"><i data-lucide="wand-2"></i>Text Tools</button>
+    <button class="nav" data-view="history"><i data-lucide="history"></i>History</button>
+    <button class="nav" data-view="settings"><i data-lucide="settings"></i>Settings</button>
+  </nav>
+  <div class="ver">TracGPT v1.0.0</div>
+</aside>
+
+<main class="main">
+  <header class="topbar glass">
+    <button class="icon" id="menuBtn" aria-label="Menu"><i data-lucide="menu"></i></button>
+    <h1 id="pageTitle">Chat</h1>
+    <span class="status" id="status"><i></i><span>Ready</span></span>
+    <button class="icon" id="themeBtn" aria-label="Ganti tema"><i data-lucide="sun-moon"></i></button>
+    <button class="icon" data-view="settings" aria-label="Pengaturan"><i data-lucide="settings-2"></i></button>
+  </header>
+
+  <section class="view active" id="view-chat">
+    <div class="scroll" id="scroll">
+      <div class="wrap">
+        <div class="hero" id="hero">
+          <h2>What can I help you with?</h2>
+          <p>Ask anything. Explore ideas. Get things done.</p>
+          <div class="cards" id="cards"></div>
+        </div>
+        <div id="messages"></div>
+      </div>
+    </div>
+    <div class="composer-area">
+      <div class="wrap">
+        <div class="actions" id="chatActions" hidden>
+          <button class="chip" id="regen"><i data-lucide="refresh-cw"></i>Regenerate</button>
+          <button class="chip" id="clear"><i data-lucide="trash-2"></i>Clear conversation</button>
+        </div>
+        <div class="composer glass">
+          <textarea id="input" rows="1" maxlength="4000" placeholder="Message TracGPT..."></textarea>
+          <div class="cfoot"><span id="count">0 / 4000</span><button class="send" id="send" disabled aria-label="Kirim"><i data-lucide="arrow-up"></i></button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="view" id="view-tools">
+    <div class="scroll"><div class="wrap">
+      <h2 class="vt">Text Tools</h2>
+      <div class="cards" id="toolCards"></div>
+      <div class="glass panel">
+        <label for="toolText" id="toolLabel">Pilih tool, lalu tempel teks di sini</label>
+        <textarea id="toolText" rows="6" maxlength="4000" placeholder="Tempel atau tulis teks..."></textarea>
+        <button class="btn primary" id="toolRun" disabled><i data-lucide="play"></i>Run</button>
+      </div>
+    </div></div>
+  </section>
+
+  <section class="view" id="view-history">
+    <div class="scroll"><div class="wrap"><h2 class="vt">History</h2><div id="historyList"></div></div></div>
+  </section>
+
+  <section class="view" id="view-settings">
+    <div class="scroll"><div class="wrap">
+      <h2 class="vt">Settings</h2>
+      <div class="glass panel row"><div><b>Dark mode</b><small>Dark / Light Liquid Glass</small></div><button class="switch" id="swTheme" role="switch" aria-checked="true"></button></div>
+      <div class="glass panel row"><div><b>Animasi interface</b><small>Matikan untuk mengurangi gerakan</small></div><button class="switch" id="swAnim" role="switch" aria-checked="true"></button></div>
+      <div class="glass panel row"><div><b>Clear chat history</b><small>Hapus semua percakapan tersimpan</small></div><button class="btn danger" id="clearAll"><i data-lucide="trash-2"></i>Hapus</button></div>
+      <div class="glass panel"><b>Tentang</b><p>TracGPT v1.0.0 — asisten AI oleh TracLabs. Riwayat chat disimpan hanya di browser kamu (localStorage).</p></div>
+      <div class="glass panel"><b>Informasi API</b><p>Endpoint publik NexaDev: <code>https://api.nexadev.my.id/ai/gpt4?q=…</code>. Dipanggil langsung dari browser, jadi bergantung pada batas layanan dan konfigurasi CORS server mereka. Tidak ada streaming, autentikasi, atau jaminan privasi yang diketahui — jangan kirim data sensitif.</p></div>
+    </div></div>
+  </section>
+</main>
+
+<div class="toast" id="toast" role="status"></div>
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
