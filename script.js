@@ -1,6 +1,6 @@
 (() => {
 "use strict";
-const API = "https://api.nexadev.my.id/ai/gpt4";
+const API = "/api/ai";
 const KEY = "tracgpt.chats", SKEY = "tracgpt.settings", TIMEOUT = 30000;
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -57,6 +57,7 @@ async function askAI(question) {
       if (ctrl.signal.aborted) throw new Error("Permintaan dibatalkan.");
       throw new Error("API tidak dapat dihubungi. Server mungkin sedang down atau memblokir akses dari browser (CORS).");
     }
+    if (res.status === 502 || res.status === 504) throw new Error("Server NexaDev tidak merespons. Coba lagi sebentar lagi.");
     if (!res.ok) throw new Error(`Server AI mengembalikan error (HTTP ${res.status}).`);
     let json;
     try { json = await res.json(); } catch { throw new Error("Respons dari server bukan JSON yang valid."); }
